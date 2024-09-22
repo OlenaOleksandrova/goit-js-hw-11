@@ -1,3 +1,4 @@
+
 import { BASE_URL, API_KEY } from "./js/pixabay-api.js";
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
@@ -26,7 +27,7 @@ const params = {
 };
 
 
-const imagesBoxEl = document.querySelector('.js-images');
+const imagesBoxEl = document.querySelector('.gallery');
 
 fetchImages(params).then(data => {
     const { hits } = data;
@@ -34,20 +35,23 @@ fetchImages(params).then(data => {
     const imagesMarkup = hits.reduce((acc, item) => {
         return (
             acc +
-            `<article>
-                <img src="${item.webformatURL}" alt="${item.tags}">
-                <p>Large Image URL: ${item.largeImageURL}</p>
-                <p>Likes: ${item.likes}</p>
-                <p>Views: ${item.views}</p>
-                <p>Comments: ${item.comments}</p>
-                <p>Downloads: ${item.downloads}</p>
+            `<article class="gallery-item">
+                <a href="${item.largeImageURL}" class="gallery-link">
+                 <img src="${item.webformatURL}" alt="${item.tags}" class="gallery-image" />
+                 </a>
+                 <div class="info">
+                <p class="info-item">Likes: ${item.likes}</p>
+                <p class="info-item">Views: ${item.views}</p>
+                <p class="info-item">Comments: ${item.comments}</p>
+                <p class="info-item">Downloads: ${item.downloads}</p>
+                </div>
             </article>`
         );
     }, '');
 
     imagesBoxEl.innerHTML = imagesMarkup;
 
-    const images = new SimpleLightbox('.js-images a', {
+    const images = new SimpleLightbox('.gallery a', {
             captions: true,
             captionDelay: 250,
     });
