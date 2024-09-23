@@ -64,10 +64,17 @@
    
 //     });
 //  });
+
+
+
+
+
 import { fetchImages } from './js/pixabay-api.js';
 import { renderImages, showLoader, hideLoader } from './js/render-functions';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 
 // import { BASE_URL, API_KEY } from "./js/pixabay-api.js";
 
@@ -87,6 +94,7 @@ searchForm.addEventListener('submit', event => {
     };
     
     showLoader();
+
   fetchImages(query)
     .then(images => {
       renderImages(images);
@@ -104,6 +112,5 @@ searchForm.addEventListener('submit', event => {
       hideLoader();
     });
 });
-
 
 
