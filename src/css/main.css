@@ -119,3 +119,10 @@ body {
 .gallery-item:hover .gallery-image {
     transform: scale(1.05);
 }
+
+.loader {
+    display: none;
+    text-align: center;
+    font-size: 20px;
+    color: #333;
+}

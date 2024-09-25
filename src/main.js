@@ -8,7 +8,19 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const searchForm = document.querySelector('.search-form');
 const imagesBoxEl = document.querySelector('.gallery');
+const loaderEl = document.querySelector('.loader'); 
 let gallery = null;
+
+// показ завантажувача виправлення
+function showLoader() {
+    loaderEl.style.display = 'block';
+}
+
+//приховування завантажувача виправлення
+function hideLoader() {
+    loaderEl.style.display = 'none';
+}
+
 
 // подія форми 
 searchForm.addEventListener('submit', event => {
@@ -20,7 +32,8 @@ searchForm.addEventListener('submit', event => {
         return; 
     }
 
-    imagesBoxEl.innerHTML = '';
+    imagesBoxEl.innerHTML =
+     showLoader();    '';
 
     fetchImages(query)
         .then(data => {
@@ -48,5 +61,8 @@ searchForm.addEventListener('submit', event => {
                 title: 'Error',
                 message: error.message,
             });
-        });
+        })
+    .finally(() => {
+        hideLoader();
+    });
 });
